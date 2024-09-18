@@ -20,8 +20,8 @@ public final class ServiceResolver {
     public static let shared = ServiceResolver()
     private var isUsingCache = true
     
-    private var serviceCreation = [ObjectIdentifier: (ServiceResolver) -> AnyObject]()
-    private var serviceResolve = [ObjectIdentifier: InjectionService]()
+    private var serviceCreation = [String: (ServiceResolver) -> AnyObject]()
+    private var serviceResolve = [String: InjectionService]()
     private let accessQueue = DispatchQueue(label: String(describing: ServiceResolver.self))
     
     private init() { }
@@ -40,14 +40,13 @@ public final class ServiceResolver {
     
     public func register<Service: AnyObject>(_ type: Service.Type, closure: @escaping (ServiceResolver) -> Service) {
         accessQueue.sync {
-            let key = ObjectIdentifier(type)
+            let key = String(describing: type)
             serviceCreation[key] = closure
         }
     }
     
     public func resolve<Service: AnyObject>(_ type: Service.Type) -> Service? {
-        let key = ObjectIdentifier(type)
-        
+        let key = String(describing: type)
         if let cachedService: Service = accessQueue.sync(execute: {
             return isUsingCache ? serviceResolve[key]?.service as? Service : nil
         }) {
