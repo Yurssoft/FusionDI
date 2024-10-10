@@ -21,6 +21,14 @@ let package = Package(
             targets: [name]
         ),
         .library(
+            name: protocols,
+            targets: [protocols]
+        ),
+        .library(
+            name: mock,
+            targets: [mock]
+        ),
+        .library(
             name: name + "AllTargets",
             targets: [name, protocols, mock]
         )
