@@ -11,12 +11,6 @@ import Foundation
 import PhotosServiceProtocols
 
 public extension PhotosService {
-    var asClient: PhotosService {
-        PhotosService.createMock(client: self)
-    }
-}
-
-public extension PhotosService {
     static func createMock(client: MockPhotosService) -> PhotosService {
         let service = PhotosService(
             fetchAllPhotos: client.fetchAllPhotos
