@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		50AC84202CB84CF6002786BF /* FusionDI in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC841F2CB84CF6002786BF /* FusionDI */; };
 		50AC842A2CB85FCA002786BF /* GalleryList in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC84292CB85FCA002786BF /* GalleryList */; };
+		50AC842C2CB863EC002786BF /* PhotosServiceAllTargets in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC842B2CB863EC002786BF /* PhotosServiceAllTargets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50AC84202CB84CF6002786BF /* FusionDI in Frameworks */,
+				50AC842C2CB863EC002786BF /* PhotosServiceAllTargets in Frameworks */,
 				50AC842A2CB85FCA002786BF /* GalleryList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +109,7 @@
 			packageProductDependencies = (
 				50AC841F2CB84CF6002786BF /* FusionDI */,
 				50AC84292CB85FCA002786BF /* GalleryList */,
+				50AC842B2CB863EC002786BF /* PhotosServiceAllTargets */,
 			);
 			productName = FusionGallery;
 			productReference = 503B532E2CB84C35008BE430 /* FusionGallery.app */;
@@ -482,6 +485,10 @@
 		50AC84292CB85FCA002786BF /* GalleryList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GalleryList;
+		};
+		50AC842B2CB863EC002786BF /* PhotosServiceAllTargets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PhotosServiceAllTargets;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
