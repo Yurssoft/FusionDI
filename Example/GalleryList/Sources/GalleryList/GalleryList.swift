@@ -55,11 +55,17 @@ extension PhotosServiceDependency {
     }
 }
 
-#Preview {
-    ServiceResolver.shared.turnOffServiceCache()
-    ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in
-        PhotosServiceDependency.mock
+public extension GalleryList {
+    static func setupPreview() {
+        ServiceResolver.shared.turnOffServiceCache()
+        ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in
+            PhotosServiceDependency.mock
+        }
     }
+}
+
+#Preview {
+    GalleryList.setupPreview()
     return GalleryList(viewModel: GalleryList.ViewModel())
 }
 
