@@ -66,7 +66,7 @@ public final class ServiceResolver {
         }
         
         guard let serviceCreationClosure = accessQueue.sync(execute: { serviceCreation[key] }) else {
-            throw ServiceError.ServiceError
+            throw ServiceError.absentCreationClosure
         }
         let service = serviceCreationClosure(self)
         
