@@ -37,6 +37,7 @@ let package = Package(
         ),
         .target(
             name: mock,
+            dependencies: [Target.Dependency.byNameItem(name: protocols, condition: .none)],
             swiftSettings: isDebugSwiftSetting
         ),
         
