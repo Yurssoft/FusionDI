@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50AC84202CB84CF6002786BF /* FusionDI in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC841F2CB84CF6002786BF /* FusionDI */; };
+		50AC842A2CB85FCA002786BF /* GalleryList in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC84292CB85FCA002786BF /* GalleryList */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50AC84202CB84CF6002786BF /* FusionDI in Frameworks */,
+				50AC842A2CB85FCA002786BF /* GalleryList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +64,7 @@
 			children = (
 				503B53302CB84C35008BE430 /* FusionGallery */,
 				503B53412CB84C36008BE430 /* FusionGalleryTests */,
+				50AC84282CB85FCA002786BF /* Frameworks */,
 				503B532F2CB84C35008BE430 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +76,13 @@
 				503B533E2CB84C36008BE430 /* FusionGalleryTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		50AC84282CB85FCA002786BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +106,7 @@
 			name = FusionGallery;
 			packageProductDependencies = (
 				50AC841F2CB84CF6002786BF /* FusionDI */,
+				50AC84292CB85FCA002786BF /* GalleryList */,
 			);
 			productName = FusionGallery;
 			productReference = 503B532E2CB84C35008BE430 /* FusionGallery.app */;
@@ -467,6 +478,10 @@
 		50AC841F2CB84CF6002786BF /* FusionDI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FusionDI;
+		};
+		50AC84292CB85FCA002786BF /* GalleryList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GalleryList;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
