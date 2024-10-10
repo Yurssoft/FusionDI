@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import FusionDI
+
+public final class PhotosServiceDependency: ValueDependencyWrapper<PhotosService> { }
 
 public struct PhotosService {
     public typealias FetchPhotos = () async throws -> [Photo]
