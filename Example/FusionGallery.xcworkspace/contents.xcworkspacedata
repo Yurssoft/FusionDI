@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:PhotosService">
+   </FileRef>
+   <FileRef
       location = "container:FusionGallery.xcodeproj">
    </FileRef>
 </Workspace>

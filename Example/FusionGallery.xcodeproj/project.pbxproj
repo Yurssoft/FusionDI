@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		50AC84202CB84CF6002786BF /* FusionDI in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC841F2CB84CF6002786BF /* FusionDI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		503B533F2CB84C36008BE430 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50AC84202CB84CF6002786BF /* FusionDI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,7 @@
 			);
 			name = FusionGallery;
 			packageProductDependencies = (
+				50AC841F2CB84CF6002786BF /* FusionDI */,
 			);
 			productName = FusionGallery;
 			productReference = 503B532E2CB84C35008BE430 /* FusionGallery.app */;
@@ -146,6 +152,9 @@
 			);
 			mainGroup = 503B53252CB84C35008BE430;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				50AC841E2CB84CF6002786BF /* XCLocalSwiftPackageReference "../../FusionDI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 503B532F2CB84C35008BE430 /* Products */;
 			projectDirPath = "";
@@ -446,6 +455,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		50AC841E2CB84CF6002786BF /* XCLocalSwiftPackageReference "../../FusionDI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../FusionDI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		50AC841F2CB84CF6002786BF /* FusionDI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FusionDI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 503B53262CB84C35008BE430 /* Project object */;
 }
