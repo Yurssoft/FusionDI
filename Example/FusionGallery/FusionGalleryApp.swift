@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct FusionGalleryApp: App {
+    init() {
+        DependenciesInitiator.initDependencies()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
