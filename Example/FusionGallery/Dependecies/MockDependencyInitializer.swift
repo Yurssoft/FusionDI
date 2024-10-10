@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FusionDI
 
 #if DEBUG
 
@@ -21,5 +22,17 @@ Steps to link a Swift file only in Debug builds:
 
 Reference: https://augmentedcode.io/2022/05/02/linking-a-swift-package-only-in-debug-builds/
 */
+
+import PhotosServiceProtocols
+import PhotosServiceMock
+
+enum DependenciesInitiator {
+    static func initDependencies() {
+        ServiceResolver.shared.turnOffServiceCache()
+        ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in PhotosServiceDependency.mock }
+    }
+}
+
+#else
 
 #endif
