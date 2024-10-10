@@ -18,6 +18,12 @@ struct ContentView: View {
     }
 }
 
+#if DEBUG
+
+
 #Preview {
-    ContentView()
+    GalleryList.setupPreview()
+    return ContentView()
 }
+
+#endif
