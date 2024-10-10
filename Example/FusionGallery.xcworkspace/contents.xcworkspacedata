@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:GalleryList">
+   </FileRef>
+   <FileRef
       location = "group:PhotosService">
    </FileRef>
    <FileRef
