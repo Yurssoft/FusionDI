@@ -49,12 +49,6 @@ import FusionDI
 import PhotosServiceMock
 import PhotosServiceProtocols
 
-extension PhotosServiceDependency {
-    static var mock: PhotosServiceDependency {
-        PhotosServiceDependency(service: PhotosService.mockPhotosService)
-    }
-}
-
 public extension GalleryList {
     static func setupPreview() {
         ServiceResolver.shared.turnOffServiceCache()
