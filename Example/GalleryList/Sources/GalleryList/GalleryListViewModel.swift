@@ -9,7 +9,6 @@ import SwiftUI
 import PhotosServiceProtocols
 import FusionDI
 
-
 public final class PhotosServiceDependency: ValueDependencyWrapper<PhotosService> { }
 
 extension GalleryList {
