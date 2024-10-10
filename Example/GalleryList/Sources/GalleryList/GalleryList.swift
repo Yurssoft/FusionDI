@@ -49,7 +49,7 @@ import FusionDI
 import PhotosServiceMock
 import PhotosServiceProtocols
 
-public extension GalleryList {
+extension GalleryList {
     static func setupPreview() {
         ServiceResolver.shared.turnOffServiceCache()
         ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in
