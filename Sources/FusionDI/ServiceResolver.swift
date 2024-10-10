@@ -38,6 +38,10 @@ public final class ServiceResolver {
         }
     }
     
+    public func register<Service: AnyObject>(_ type: Service.Type, closure: @escaping () -> Service) {
+        register(type) { _ in closure() }
+    }
+    
     public func register<Service: AnyObject>(_ type: Service.Type, closure: @escaping (ServiceResolver) -> Service) {
         accessQueue.sync {
             let key = String(describing: type)
@@ -45,7 +49,15 @@ public final class ServiceResolver {
         }
     }
     
+    public func forceResolve<Service: AnyObject>(_ type: Service.Type) -> Service {
+        try! resolve(type)
+    }
+    
     public func resolve<Service: AnyObject>(_ type: Service.Type) -> Service? {
+        try? resolve(type)
+    }
+    
+    public func resolve<Service: AnyObject>(_ type: Service.Type) throws -> Service {
         let key = String(describing: type)
         if let cachedService: Service = accessQueue.sync(execute: {
             return isUsingCache ? serviceResolve[key]?.service as? Service : nil
@@ -54,14 +66,17 @@ public final class ServiceResolver {
         }
         
         guard let serviceCreationClosure = accessQueue.sync(execute: { serviceCreation[key] }) else {
-            return nil
+            throw ServiceError.absentCreationClosure
         }
         let service = serviceCreationClosure(self)
         
         accessQueue.sync {
             serviceResolve[key] = InjectionService(service: service)
         }
-        
-        return service as? Service
+        if let createdService = service as? Service {
+            return service as! Service
+        } else {
+            throw ServiceError.cannotCastServiceType
+        }
     }
 }
