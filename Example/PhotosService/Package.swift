@@ -28,6 +28,7 @@ let package = Package(
     targets: [
         .target(
             name: name,
+            dependencies: [Target.Dependency.byNameItem(name: protocols, condition: .none)],
             swiftSettings: isDebugSwiftSetting
         ),
         .target(
