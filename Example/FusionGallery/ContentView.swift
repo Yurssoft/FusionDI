@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
+import GalleryList
 
 struct ContentView: View {
+    let vm = GalleryList.ViewModel()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            GalleryList(viewModel: vm)
+            .navigationTitle("Gallery List")
         }
-        .padding()
     }
 }
 
