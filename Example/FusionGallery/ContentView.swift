@@ -20,9 +20,6 @@ struct ContentView: View {
 
 #if DEBUG
 
-#Preview {
-    GalleryList.setupPreview()
-    return ContentView()
-}
+#Preview { ContentView() }
 
 #endif
