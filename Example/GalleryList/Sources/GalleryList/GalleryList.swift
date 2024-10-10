@@ -1,26 +1,27 @@
 import SwiftUI
 
-struct GalleryList: View {
+public struct GalleryList: View {
+    public init(viewModel: GalleryList.ViewModel) {
+        self.viewModel = viewModel
+    }
+    
     @ObservedObject var viewModel: ViewModel
     
-    var body: some View {
-        NavigationView {
-            List(viewModel.photos) { photo in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Photo ID: \(photo.id)")
-                            .font(.headline)
-                        Text("Data Size: \(formatDataSize(photo.imageData.count))")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Text("Date: \(photo.creationDate, formatter: dateFormatter)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
+    public var body: some View {
+        List(viewModel.photos) { photo in
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Photo ID: \(photo.id)")
+                        .font(.headline)
+                    Text("Data Size: \(formatDataSize(photo.imageData.count))")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Text("Date: \(photo.creationDate, formatter: dateFormatter)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
                 }
-                .padding(.vertical, 4)
             }
-            .navigationTitle("Gallery List")
+            .padding(.vertical, 4)
         }
         .onAppear {
             viewModel.fetchPhotos()
