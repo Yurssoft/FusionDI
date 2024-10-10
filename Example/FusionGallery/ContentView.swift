@@ -9,7 +9,7 @@ import SwiftUI
 import GalleryList
 
 struct ContentView: View {
-    let vm = GalleryList.ViewModel()
+    @StateObject private var vm = GalleryList.ViewModel()
     var body: some View {
         NavigationView {
             GalleryList(viewModel: vm)
