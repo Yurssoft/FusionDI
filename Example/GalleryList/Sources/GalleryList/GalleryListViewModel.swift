@@ -10,14 +10,14 @@ import PhotosServiceProtocols
 import FusionDI
 
 
-final class PhotosServiceDependency: ValueDependencyWrapper<PhotosService> { }
+public final class PhotosServiceDependency: ValueDependencyWrapper<PhotosService> { }
 
 extension GalleryList {
-    final class ViewModel: ObservableObject {
+    public final class ViewModel: ObservableObject {
         @ServiceDependency private var photoService: PhotosServiceDependency
         @Published var photos: [GalleryPhoto] = []
         
-        init() {
+        public init() {
             fetchPhotos()
         }
         
