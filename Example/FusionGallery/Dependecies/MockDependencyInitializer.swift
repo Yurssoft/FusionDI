@@ -23,13 +23,25 @@ Steps to link a Swift file only in Debug builds:
 Reference: https://augmentedcode.io/2022/05/02/linking-a-swift-package-only-in-debug-builds/
 */
 
+enum DebugSettings {
+    static var isMockEnabled = false
+    
+    static func enableMocks() {
+        DebugSettings.isMockEnabled = true
+        DependenciesInitiator.initDependencies()
+    }
+}
+
 import PhotosServiceProtocols
 import PhotosServiceMock
+import PhotosService
 
 enum DependenciesInitiator {
     static func initDependencies() {
-        ServiceResolver.shared.turnOffServiceCache()
-        ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in PhotosServiceDependency.mock }
+        if DebugSettings.isMockEnabled {
+            ServiceResolver.shared.turnOffServiceCache()
+        }
+        ServiceResolver.shared.register(PhotosServiceDependency.self) { DebugSettings.isMockEnabled ? .mock : .prod }
     }
 }
 

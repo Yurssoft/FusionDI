@@ -20,6 +20,9 @@ struct ContentView: View {
 
 #if DEBUG
 
-#Preview { ContentView() }
+#Preview {
+    DebugSettings.enableMocks()
+    return ContentView()
+}
 
 #endif
