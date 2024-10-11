@@ -53,7 +53,7 @@ public final class ServiceResolver {
         try! resolve(type)
     }
     
-    public func resolve<Service: AnyObject>(_ type: Service.Type) -> Service? {
+    public func resolveOptional<Service: AnyObject>(_ type: Service.Type) -> Service? {
         try? resolve(type)
     }
     
