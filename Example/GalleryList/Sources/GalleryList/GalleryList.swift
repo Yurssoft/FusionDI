@@ -52,9 +52,7 @@ import PhotosServiceProtocols
 extension GalleryList {
     static func setupPreview() {
         ServiceResolver.shared.turnOffServiceCache()
-        ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in
-            PhotosServiceDependency.mock
-        }
+        ServiceResolver.shared.register(PhotosServiceDependency.self) { .mock }
     }
 }
 
