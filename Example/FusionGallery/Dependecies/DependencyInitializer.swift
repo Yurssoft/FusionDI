@@ -16,7 +16,7 @@ import PhotosService
 
 enum DependenciesInitiator {
     static func initDependencies() {
-        ServiceResolver.shared.register(PhotosServiceDependency.self) { _ in PhotosServiceDependency.prod }
+        ServiceResolver.shared.register(PhotosServiceDependency.self) { PhotosServiceDependency.prod }
     }
 }
 
