@@ -1,5 +1,16 @@
 import Foundation
 
+extension Dictionary where Key == String {
+    subscript<Service>(type: Service.Type) -> Value? {
+        get {
+            return self[String(describing: type)]
+        }
+        set {
+            self[String(describing: type)] = newValue
+        }
+    }
+}
+
 open class ValueDependencyWrapper<Service> {
     public init(service: Service) {
         self.service = service
@@ -22,7 +33,7 @@ public final class ServiceResolver {
     
     private var serviceCreation = [String: (ServiceResolver) -> AnyObject]()
     private var serviceResolve = [String: InjectionService]()
-    private let accessQueue = DispatchQueue(label: String(describing: ServiceResolver.self))
+    private let accessQueue = DispatchQueue(label: ServiceResolver.typeName(ServiceResolver.self))
     
     private init() { }
     
@@ -38,6 +49,23 @@ public final class ServiceResolver {
         accessQueue.sync {
             serviceResolve.removeAll()
         }
+    }
+    
+    public func removeCreationClosure<Service: AnyObject>(_ type: Service.Type) {
+        accessQueue.sync {
+            serviceCreation[Self.typeName(type)] = nil
+        }
+    }
+    
+    public func removeServiceObject<Service: AnyObject>(_ type: Service.Type) {
+        accessQueue.sync {
+            serviceResolve[Self.typeName(type)] = nil
+        }
+    }
+    
+    public func removeService<Service: AnyObject>(_ type: Service.Type) {
+        removeCreationClosure(type)
+        removeServiceObject(type)
     }
     
     public func clearAllServiceCaches() {
@@ -63,8 +91,7 @@ public final class ServiceResolver {
     
     public func register<Service: AnyObject>(_ type: Service.Type, closure: @escaping (ServiceResolver) -> Service) {
         accessQueue.sync {
-            let key = String(describing: type)
-            serviceCreation[key] = closure
+            serviceCreation[Self.typeName(type)] = closure
         }
     }
     
@@ -77,20 +104,19 @@ public final class ServiceResolver {
     }
     
     public func resolve<Service: AnyObject>(_ type: Service.Type) throws -> Service {
-        let key = String(describing: type)
         if let cachedService: Service = accessQueue.sync(execute: {
-            return isUsingCache ? serviceResolve[key]?.service as? Service : nil
+            return isUsingCache ? serviceResolve[Self.typeName(type)]?.service as? Service : nil
         }) {
             return cachedService
         }
         
-        guard let serviceCreationClosure = accessQueue.sync(execute: { serviceCreation[key] }) else {
+        guard let serviceCreationClosure = accessQueue.sync(execute: { serviceCreation[Self.typeName(type)] }) else {
             throw ServiceError.absentCreationClosure
         }
         let service = serviceCreationClosure(self)
         
         accessQueue.sync {
-            serviceResolve[key] = InjectionService(service: service)
+            serviceResolve[Self.typeName(type)] = InjectionService(service: service)
         }
         if let createdService = service as? Service {
             return createdService
@@ -101,6 +127,25 @@ public final class ServiceResolver {
              ServiceResolver.shared.register(Dependency.self) { DependencyTheOtherType() }
              */
             throw ServiceError.cannotCastServiceType
+        }
+    }
+    
+    private static func typeName<T>(_ type: T.Type) -> String { String(describing: type) }
+    
+    public subscript<Service: AnyObject>(type: Service.Type) -> Service? {
+        get {
+            return resolveOptional(type)
+        }
+        set {
+            accessQueue.sync {
+                if let service = newValue {
+                    serviceResolve[type] = InjectionService(service: service)
+                    serviceCreation[type] = { _ in service }
+                } else {
+                    serviceResolve[type] = nil
+                    serviceCreation[type] = nil
+                }
+            }
         }
     }
 }
