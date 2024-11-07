@@ -110,6 +110,20 @@ struct Test {
                 fatalError()
             }
         }
-        
     }
+    
+//    @Test func testWrongServiceCache() async throws {
+//        let type = Dependency.self
+//        ServiceResolver.shared.register(type) { DependencyTheOtherType() }
+//        do {
+//            let dependency = try ServiceResolver.shared.resolve(type)
+//            fatalError(String(describing: dependency))
+//        } catch let error {
+//            if let serviceError = error as? ServiceResolver.ServiceError {
+//                #expect(serviceError == ServiceResolver.ServiceError.cannotCastServiceType)
+//            } else {
+//                fatalError()
+//            }
+//        }
+//    }
 }
