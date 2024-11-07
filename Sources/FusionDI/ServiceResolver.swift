@@ -26,6 +26,8 @@ public final class ServiceResolver {
     
     private init() { }
     
+    public var registeredDependenciesCreationClosured: [String: (ServiceResolver) -> AnyObject] { accessQueue.sync { serviceCreation } }
+    
     public func turnOffServiceCache() {
         accessQueue.sync {
             isUsingCache = false
