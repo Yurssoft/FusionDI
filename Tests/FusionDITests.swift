@@ -112,6 +112,64 @@ struct Test {
         }
     }
     
+    @Test func testSubscriptRegisteringDependency() async throws {
+        let type = Dependency.self
+        let dependency = Dependency()
+        ServiceResolver.shared[type] = dependency
+        
+        #expect(ServiceResolver.shared.registeredDependenciesCreationClosured.count == 1)
+        #expect(ServiceResolver.shared.forceResolve(type) === dependency)
+    }
+
+    @Test func testSubscriptResolvingDependency() async throws {
+        let type = Dependency.self
+        let dependency = Dependency()
+        ServiceResolver.shared[type] = dependency
+        
+        let resolvedDependency = ServiceResolver.shared[type]
+        #expect(resolvedDependency === dependency)
+    }
+
+    @Test func testSubscriptClearDependency() async throws {
+        let type = Dependency.self
+        ServiceResolver.shared[type] = Dependency()
+        
+        #expect(ServiceResolver.shared.forceResolve(type) is Dependency)
+        
+        ServiceResolver.shared[type] = nil
+        let resolvedDependency = ServiceResolver.shared.resolveOptional(type)
+        
+        #expect(resolvedDependency == nil)
+    }
+
+    @Test func testSubscriptServiceCacheBehavior() async throws {
+        let type = Dependency.self
+        ServiceResolver.shared.register(type) { Dependency() }
+        ServiceResolver.shared.turnOffServiceCache()
+        
+        let dependency1 = ServiceResolver.shared[type]
+        let dependency2 = ServiceResolver.shared[type]
+        
+        #expect(ObjectIdentifier(dependency1!) != ObjectIdentifier(dependency2!))
+        
+        ServiceResolver.shared.turnOnServiceCache()
+        
+        let dependency3 = ServiceResolver.shared[type]
+        let dependency4 = ServiceResolver.shared[type]
+        
+        #expect(ObjectIdentifier(dependency3!) == ObjectIdentifier(dependency4!))
+    }
+
+    @Test func testSubscriptWithExistingFunctionality() async throws {
+        let type = Dependency.self
+        ServiceResolver.shared.register(type) { Dependency() }
+        
+        let resolvedBySubscript = ServiceResolver.shared[type]
+        let resolvedByMethod = ServiceResolver.shared.forceResolve(type)
+        
+        #expect(resolvedBySubscript === resolvedByMethod)
+    }
+    
 //    @Test func testWrongServiceCache() async throws {
 //        let type = Dependency.self
 //        ServiceResolver.shared.register(type) { DependencyTheOtherType() }
