@@ -10,6 +10,7 @@ import FusionDI
 
 struct Test {
     final class Dependency { }
+    final class DependencyTheOtherType { }
     
     @Test func testRegisteringDependency() async throws {
         let type = Dependency.self
@@ -18,6 +19,34 @@ struct Test {
         
         let key = String(describing: type)
         #expect(ServiceResolver.shared.registeredDependenciesCreationClosured[key] != nil)
+    }
+    
+    @Test func testCreatingDependency() async throws {
+        let type = Dependency.self
+        ServiceResolver.shared.register(type) { Dependency() }
+        #expect(ServiceResolver.shared.registeredDependenciesCreationClosured.count == 1)
+        
+        let dependency1 = ServiceResolver.shared.forceResolve(type)
+        let objectKey1 = ObjectIdentifier(dependency1)
+        
+        let key = String(describing: type)
+        #expect(ServiceResolver.shared.registeredDependenciesCreationClosured[key] != nil)
+        ServiceResolver.shared.turnOffServiceCache()
+        
+        let dependency2 = ServiceResolver.shared.forceResolve(type)
+        let objectKey2 = ObjectIdentifier(dependency2)
+        
+        #expect(objectKey1 != objectKey2)
+        
+        ServiceResolver.shared.turnOnServiceCache()
+        
+        let dependency3 = ServiceResolver.shared.forceResolve(type)
+        let objectKey3 = ObjectIdentifier(dependency3)
+        
+        let dependency4 = ServiceResolver.shared.forceResolve(type)
+        let objectKey4 = ObjectIdentifier(dependency4)
+        
+        #expect(objectKey3 == objectKey4)
     }
     
     @Test func testRegisteringResolving() async throws {
