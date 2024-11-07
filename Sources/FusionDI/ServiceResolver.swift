@@ -40,6 +40,25 @@ public final class ServiceResolver {
         }
     }
     
+    public func removeCreationClosure<Service: AnyObject>(_ type: Service.Type) {
+        accessQueue.sync {
+            serviceCreation.removeValue(forKey: String(describing: type))
+        }
+    }
+    
+    public func removeServiceObject<Service: AnyObject>(_ service: Service.Type) {
+        accessQueue.sync {
+            serviceResolve.removeValue(forKey: String(describing: type(of: service)))
+        }
+    }
+    
+    public func removeService<Service: AnyObject>(_ type: Service.Type) {
+        accessQueue.sync {
+            removeCreationClosure(type)
+            removeServiceObject(type)
+        }
+    }
+    
     public func clearAllServiceCaches() {
         clearCreationClosures()
         clearServiceCache()
