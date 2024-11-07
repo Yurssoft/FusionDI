@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "859A1E7C-24C7-4798-BAF7-F4B9111D72C5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "FusionDITests",
+        "name" : "FusionDITests"
+      }
+    }
+  ],
+  "version" : 1
+}
