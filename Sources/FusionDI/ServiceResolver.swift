@@ -28,6 +28,23 @@ public final class ServiceResolver {
     
     public var registeredDependenciesCreationClosured: [String: (ServiceResolver) -> AnyObject] { accessQueue.sync { serviceCreation } }
     
+    public func clearCreationClosures() {
+        accessQueue.sync {
+            serviceCreation.removeAll()
+        }
+    }
+    
+    public func clearServiceCache() {
+        accessQueue.sync {
+            serviceResolve.removeAll()
+        }
+    }
+    
+    public func clearAllServiceCaches() {
+        clearCreationClosures()
+        clearServiceCache()
+    }
+    
     public func turnOffServiceCache() {
         accessQueue.sync {
             isUsingCache = false
@@ -76,7 +93,7 @@ public final class ServiceResolver {
             serviceResolve[key] = InjectionService(service: service)
         }
         if let createdService = service as? Service {
-            return service as! Service
+            return createdService
         } else {
             throw ServiceError.cannotCastServiceType
         }
