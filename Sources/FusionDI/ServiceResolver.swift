@@ -95,6 +95,11 @@ public final class ServiceResolver {
         if let createdService = service as? Service {
             return createdService
         } else {
+            /*
+             Technically, this could not happen as it would not compile
+             Error: Cannot convert value of type 'DependencyTheOtherType' to closure result type 'Dependency'
+             ServiceResolver.shared.register(Dependency.self) { DependencyTheOtherType() }
+             */
             throw ServiceError.cannotCastServiceType
         }
     }
