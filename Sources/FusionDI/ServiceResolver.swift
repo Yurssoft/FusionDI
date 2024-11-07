@@ -53,13 +53,13 @@ public final class ServiceResolver {
     
     public func removeCreationClosure<Service: AnyObject>(_ type: Service.Type) {
         accessQueue.sync {
-            serviceCreation[type] = nil
+            serviceCreation[Self.typeName(type)] = nil
         }
     }
     
-    public func removeServiceObject<Service: AnyObject>(_ service: Service.Type) {
+    public func removeServiceObject<Service: AnyObject>(_ type: Service.Type) {
         accessQueue.sync {
-            serviceResolve[service] = nil
+            serviceResolve[Self.typeName(type)] = nil
         }
     }
     
@@ -93,7 +93,7 @@ public final class ServiceResolver {
     
     public func register<Service: AnyObject>(_ type: Service.Type, closure: @escaping (ServiceResolver) -> Service) {
         accessQueue.sync {
-            serviceCreation[type] = closure
+            serviceCreation[Self.typeName(type)] = closure
         }
     }
     
@@ -107,18 +107,18 @@ public final class ServiceResolver {
     
     public func resolve<Service: AnyObject>(_ type: Service.Type) throws -> Service {
         if let cachedService: Service = accessQueue.sync(execute: {
-            return isUsingCache ? serviceResolve[type]?.service as? Service : nil
+            return isUsingCache ? serviceResolve[Self.typeName(type)]?.service as? Service : nil
         }) {
             return cachedService
         }
         
-        guard let serviceCreationClosure = accessQueue.sync(execute: { serviceCreation[type] }) else {
+        guard let serviceCreationClosure = accessQueue.sync(execute: { serviceCreation[Self.typeName(type)] }) else {
             throw ServiceError.absentCreationClosure
         }
         let service = serviceCreationClosure(self)
         
         accessQueue.sync {
-            serviceResolve[type] = InjectionService(service: service)
+            serviceResolve[Self.typeName(type)] = InjectionService(service: service)
         }
         if let createdService = service as? Service {
             return createdService
