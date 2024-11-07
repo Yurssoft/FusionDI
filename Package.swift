@@ -5,12 +5,10 @@ import PackageDescription
 let package = Package(
     name: "FusionDI",
     products: [
-        .library(
-            name: "FusionDI",
-            targets: ["FusionDI"]),
+        .library(name: "FusionDI", targets: ["FusionDI"]),
     ],
     targets: [
-        .target(
-            name: "FusionDI"),
+        .target(name: "FusionDI"),
+        .testTarget(name: "FusionDITests", dependencies: ["FusionDI"]),
     ]
 )
