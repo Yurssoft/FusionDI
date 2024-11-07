@@ -64,10 +64,8 @@ public final class ServiceResolver {
     }
     
     public func removeService<Service: AnyObject>(_ type: Service.Type) {
-        accessQueue.sync {
-            removeCreationClosure(type)
-            removeServiceObject(type)
-        }
+        removeCreationClosure(type)
+        removeServiceObject(type)
     }
     
     public func clearAllServiceCaches() {
