@@ -8,7 +8,7 @@
 import Foundation
 
 public extension ServiceResolver {
-    enum ServiceError: Error {
+    enum ServiceError: Error, Equatable {
         case absentCreationClosure
         case cannotCastServiceType
     }
