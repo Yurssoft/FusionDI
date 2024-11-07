@@ -22,7 +22,7 @@ public final class ServiceResolver {
     
     private var serviceCreation = [String: (ServiceResolver) -> AnyObject]()
     private var serviceResolve = [String: InjectionService]()
-    private let accessQueue = DispatchQueue(label: String(describing: ServiceResolver.self))
+    private let accessQueue = DispatchQueue(label: ServiceResolver.typeName(ServiceResolver.self))
     
     private init() { }
     
@@ -42,13 +42,13 @@ public final class ServiceResolver {
     
     public func removeCreationClosure<Service: AnyObject>(_ type: Service.Type) {
         accessQueue.sync {
-            serviceCreation.removeValue(forKey: String(describing: type))
+            serviceCreation.removeValue(forKey: Self.typeName(type))
         }
     }
     
     public func removeServiceObject<Service: AnyObject>(_ service: Service.Type) {
         accessQueue.sync {
-            serviceResolve.removeValue(forKey: String(describing: type(of: service)))
+            serviceResolve.removeValue(forKey: Self.typeName(service))
         }
     }
     
@@ -82,7 +82,7 @@ public final class ServiceResolver {
     
     public func register<Service: AnyObject>(_ type: Service.Type, closure: @escaping (ServiceResolver) -> Service) {
         accessQueue.sync {
-            let key = String(describing: type)
+            let key = Self.typeName(type)
             serviceCreation[key] = closure
         }
     }
@@ -96,7 +96,7 @@ public final class ServiceResolver {
     }
     
     public func resolve<Service: AnyObject>(_ type: Service.Type) throws -> Service {
-        let key = String(describing: type)
+        let key = Self.typeName(type)
         if let cachedService: Service = accessQueue.sync(execute: {
             return isUsingCache ? serviceResolve[key]?.service as? Service : nil
         }) {
@@ -114,12 +114,9 @@ public final class ServiceResolver {
         if let createdService = service as? Service {
             return createdService
         } else {
-            /*
-             Technically, this could not happen as it would not compile
-             Error: Cannot convert value of type 'DependencyTheOtherType' to closure result type 'Dependency'
-             ServiceResolver.shared.register(Dependency.self) { DependencyTheOtherType() }
-             */
             throw ServiceError.cannotCastServiceType
         }
     }
+    
+    private static func typeName<T>(_ type: T.Type) -> String { String(describing: type) }
 }
