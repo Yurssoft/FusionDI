@@ -142,8 +142,10 @@ public final class ServiceResolver {
             accessQueue.sync {
                 if let service = newValue {
                     serviceResolve[type] = InjectionService(service: service)
+                    serviceCreation[type] = { _ in service }
                 } else {
                     serviceResolve[type] = nil
+                    serviceCreation[type] = nil
                 }
             }
         }
