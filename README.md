@@ -47,6 +47,12 @@ let service = ServiceResolver.shared.resolve(YourServiceProtocol.self)
 - [Weaver](https://github.com/scribd/Weaver)
 - [Needle](https://github.com/uber/needle)
 
+## Limitations
+### Parallel Testing
+Dependency injection (DI) relies on shared memory, which can cause issues in concurrent contexts. Specifically, enabling parallel testing may lead to unpredictable results due to shared RAM usage. `ServiceResolver` is a reference type, and although it manages its internal state in a thread-safe manner, multiple concurrent contexts may still result in unexpected behavior. This can happen if dependencies are modified or cleared in one context while another relies on reading that data.
+
+For optimal reliability, it is recommended to disable parallel testing.
+
 ## License
 
 FusionDI is released under the MIT license. See [LICENSE](./LICENSE) for details.
