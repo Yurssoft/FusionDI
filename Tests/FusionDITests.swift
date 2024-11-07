@@ -12,7 +12,6 @@ struct Test {
     final class Dependency { }
     
     @Test func testRegisteringDependency() async throws {
-        ServiceResolver.shared.clearAllServiceCaches()
         let type = Dependency.self
         ServiceResolver.shared.register(type) { Dependency() }
         #expect(ServiceResolver.shared.registeredDependenciesCreationClosured.count == 1)
@@ -22,7 +21,6 @@ struct Test {
     }
     
     @Test func testRegisteringResolving() async throws {
-        ServiceResolver.shared.clearAllServiceCaches()
         let type = Dependency.self
         let object = Dependency()
         ServiceResolver.shared.register(type) { object }
@@ -36,7 +34,6 @@ struct Test {
     }
     
     @Test func testRegisteringResolvingWithClearCache() async throws {
-        ServiceResolver.shared.clearAllServiceCaches()
         let type = Dependency.self
         ServiceResolver.shared.register(type) { Dependency() }
         #expect(ServiceResolver.shared.registeredDependenciesCreationClosured.count == 1)
@@ -56,7 +53,6 @@ struct Test {
     }
     
     @Test func testClearCache() async throws {
-        ServiceResolver.shared.clearAllServiceCaches()
         let type = Dependency.self
         ServiceResolver.shared.register(type) { Dependency() }
         #expect(ServiceResolver.shared.registeredDependenciesCreationClosured.count == 1)
