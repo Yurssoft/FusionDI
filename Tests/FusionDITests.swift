@@ -171,6 +171,20 @@ struct Test {
         #expect(resolvedBySubscript === resolvedByMethod)
     }
     
+    @Test func testRemovingObjectFromCache() async throws {
+        let type = Dependency.self
+        ServiceResolver.shared.register(type) { Dependency() }
+        #expect(ServiceResolver.shared.registeredDependenciesCreationClosured.count == 1)
+        let object = ServiceResolver.shared.forceResolve(type)
+        
+        let key = String(describing: type)
+        #expect(ServiceResolver.shared.registeredDependenciesCreationClosured[key] != nil)
+        
+        ServiceResolver.shared.removeServiceObject(type)
+        let dependency = ServiceResolver.shared.resolveOptional(type)
+        #expect(dependency !== object)
+    }
+    
 //    @Test func testWrongServiceCache() async throws {
 //        let type = Dependency.self
 //        ServiceResolver.shared.register(type) { DependencyTheOtherType() }
