@@ -132,9 +132,10 @@ struct Test {
 
     @Test func testSubscriptClearDependency() async throws {
         let type = Dependency.self
-        ServiceResolver.shared[type] = Dependency()
+        let dependency = Dependency()
+        ServiceResolver.shared[type] = dependency
         
-        #expect(ServiceResolver.shared.forceResolve(type) is Dependency)
+        #expect(ServiceResolver.shared.forceResolve(type) === dependency)
         
         ServiceResolver.shared[type] = nil
         let resolvedDependency = ServiceResolver.shared.resolveOptional(type)
