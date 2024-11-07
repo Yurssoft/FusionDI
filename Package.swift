@@ -9,5 +9,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "FusionDI"),
+        .testTarget(name: "FusionDITests", dependencies: ["FusionDI"]),
     ]
 )
