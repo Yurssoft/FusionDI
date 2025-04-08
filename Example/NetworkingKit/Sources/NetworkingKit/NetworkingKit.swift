@@ -3,10 +3,24 @@ import Foundation
 enum Endpoint {
     case products
     
+    private var baseURL: String { "https://server.com" }
+    
     var url: String {
         switch self {
         case .products:
-            return "https://server.com"
+            return baseURL + "products"
+        }
+    }
+    
+    fileprivate var mockData: Data {
+        let data = mockString.data(using: .utf8)!
+        return data
+    }
+    
+    fileprivate var mockString: String {
+        switch self {
+        case .products:
+            return ""
         }
     }
 }
@@ -26,15 +40,7 @@ final actor NetworkClient: NetworkClientProtocol {
 
 final actor NetworkClientMock: NetworkClientProtocol {
     func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType {
-        let response = try JSONDecoder().decode(ReturnType.self, from: Self.mockResponse)
+        let response = try JSONDecoder().decode(ReturnType.self, from: endpoint.mockData)
         return response
-    }
-}
-
-extension NetworkClientMock {
-    static var mockResponse: Data {
-        let response = ""
-        let data = response.data(using: .utf8)!
-        return data
     }
 }
