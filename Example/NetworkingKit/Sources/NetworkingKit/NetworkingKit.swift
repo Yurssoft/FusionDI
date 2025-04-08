@@ -1,6 +1,6 @@
 import Foundation
 
-enum Endpoint {
+public enum Endpoint: Sendable {
     case products
     
     private var baseURL: String { "https://server.com" }
@@ -25,12 +25,13 @@ enum Endpoint {
     }
 }
 
-protocol NetworkClientProtocol {
-    func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType
+public class NetworkClient: AnyObject {
+    public func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType { fatalError() }
 }
 
-final actor NetworkClient: NetworkClientProtocol {
-    func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType {
+public final class NetworkClientAPI: NetworkClient {
+    public override init() { }
+    public override func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType {
         let url = URL(string: endpoint.url)!
         let (data, _) = try await URLSession.shared.data(from: url)
         let response = try JSONDecoder().decode(ReturnType.self, from: data)
@@ -38,8 +39,9 @@ final actor NetworkClient: NetworkClientProtocol {
     }
 }
 
-final actor NetworkClientMock: NetworkClientProtocol {
-    func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType {
+public final class NetworkClientMock: NetworkClient {
+    public override init() { }
+    public override func request<ReturnType: Decodable & Sendable>(for endpoint: Endpoint) async throws -> ReturnType {
         let response = try JSONDecoder().decode(ReturnType.self, from: endpoint.mockData)
         return response
     }
