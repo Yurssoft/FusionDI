@@ -23,7 +23,7 @@ extension GalleryList {
                 do {
                     let fetchedPhotos = try await photoService.service.fetchAllPhotos()
                     let galleryPhotos = fetchedPhotos.map { GalleryPhoto(from: $0) }
-                    DispatchQueue.main.async {
+                    await MainActor.run {
                         self.photos = galleryPhotos
                     }
                 } catch {
