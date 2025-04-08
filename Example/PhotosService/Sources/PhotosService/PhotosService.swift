@@ -7,13 +7,6 @@
 
 import Foundation
 import PhotosServiceProtocols
-import FusionDI
-
-extension PhotosServiceDependency {
-    public static var prod: PhotosServiceDependency {
-        PhotosServiceDependency(service: PhotosService.photosService)
-    }
-}
 
 public extension PhotosService {
     static var photosService: PhotosService {
