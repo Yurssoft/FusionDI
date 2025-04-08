@@ -23,12 +23,6 @@ Steps to link a Swift file only in Debug builds:
 Reference: https://augmentedcode.io/2022/05/02/linking-a-swift-package-only-in-debug-builds/
 */
 
-extension PhotosServiceDependency {
-    public static var mock: PhotosServiceDependency {
-        PhotosServiceDependency(service: PhotosService.mockPhotosService)
-    }
-}
-
 enum DebugSettings {
     static var isMockEnabled = false
     
@@ -41,6 +35,12 @@ enum DebugSettings {
 import PhotosServiceProtocols
 import PhotosServiceMock
 import PhotosService
+
+public extension PhotosServiceDependency {
+    static var mock: PhotosServiceDependency {
+        PhotosServiceDependency(service: PhotosService.mockPhotosService)
+    }
+}
 
 enum DependenciesInitiator {
     static func initDependencies() {
