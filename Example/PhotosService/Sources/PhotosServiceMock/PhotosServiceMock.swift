@@ -9,13 +9,6 @@
 
 import Foundation
 import PhotosServiceProtocols
-import FusionDI
-
-extension PhotosServiceDependency {
-    public static var mock: PhotosServiceDependency {
-        PhotosServiceDependency(service: PhotosService.mockPhotosService)
-    }
-}
 
 public extension PhotosService {
     static func createMock(client: MockPhotosService) -> PhotosService {
