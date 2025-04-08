@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Errors.swift
 //  FusionDI
 //
 //  Created by Yurii Boiko on 10/10/24.
