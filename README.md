@@ -4,7 +4,7 @@
 
 ## Features
 
-- Easy to integrate into existing projects.
+- Easy to integrate into existing projects. Move one dependency at a time.
 - Simple API for registering and resolving services.
 - Lightweight and minimalistic, ideal for small projects or learning purposes.
 
@@ -34,6 +34,12 @@ Once a service is registered, you can resolve it anywhere in your project:
 
 ```swift
 let service = ServiceResolver.shared.resolve(YourServiceProtocol.self)
+```
+
+Alternatively, use provided `@propertyWrapper` for fast access:
+
+```swift
+@ServiceDependency private var service: YourServiceProtocol
 ```
 
 ## Note
