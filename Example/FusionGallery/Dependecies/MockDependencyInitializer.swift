@@ -35,7 +35,7 @@ enum DebugSettings {
 import PhotosServiceProtocols
 import PhotosServiceMock
 import PhotosService
-import GalleryList
+import DependencyDefinitions
 
 public extension PhotosServiceDependency {
     static var mock: PhotosServiceDependency {
