@@ -2,11 +2,10 @@
 
 import PackageDescription
 
-let photonsName = "PhotosService"
-let photoPackage = Package.Dependency.package(path: "../PhotosService")
-let photoDependencies: [Target.Dependency] = [
-    Target.Dependency.product(name: photonsName + "Mock", package: photonsName),
-    Target.Dependency.product(name: photonsName + "Protocols", package: photonsName)
+let DIName = "DependencyDefinitions"
+let DIPackage = Package.Dependency.package(path: "../DependencyDefinitions")
+let DIDependencies: [Target.Dependency] = [
+    Target.Dependency.product(name: "DependencyDefinitions", package: DIName),
 ]
 
 let fusionDIName = "FusionDI"
@@ -29,13 +28,13 @@ let package = Package(
             targets: ["GalleryList"]),
     ],
     dependencies: [
-        photoPackage,
+        DIPackage,
         fusionDIPackage
     ],
     targets: [
         .target(
             name: "GalleryList",
-            dependencies: photoDependencies + fusionDIDependencies,
+            dependencies: DIDependencies + fusionDIDependencies,
             swiftSettings: isDebugSwiftSetting
         ),
 
