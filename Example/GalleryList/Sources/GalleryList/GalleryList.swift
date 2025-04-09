@@ -46,19 +46,7 @@ public struct GalleryList: View {
 #if DEBUG
 
 import FusionDI
-import PhotosServiceMock
-import PhotosServiceProtocols
-
-/*
- In real apps this shall be moved to the upstream dependency gathering library that
- will unite different dependencies and provide mocks/prod variables to all of feature packages,
- like this this one
- */
-public extension PhotosServiceDependency {
-    static var mock: PhotosServiceDependency {
-        PhotosServiceDependency(service: PhotosService.mockPhotosService)
-    }
-}
+import DependencyDefinitions
 
 extension GalleryList {
     static func setupPreview() {
