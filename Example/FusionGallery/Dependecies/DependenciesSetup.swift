@@ -8,8 +8,7 @@
 import Foundation
 import FusionDI
 import PhotosServiceProtocols
-
-public final class PhotosServiceDependency: ValueDependencyWrapper<PhotosService> { }
+import GalleryList
 
 extension PhotosServiceDependency {
     public static var prod: PhotosServiceDependency {
