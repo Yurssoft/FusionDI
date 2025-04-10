@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5017A3DB2DA5AE800006788B /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5017A3DA2DA5AE800006788B /* NetworkingKit */; };
 		50AC84202CB84CF6002786BF /* FusionDI in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC841F2CB84CF6002786BF /* FusionDI */; };
 		50AC842A2CB85FCA002786BF /* GalleryList in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC84292CB85FCA002786BF /* GalleryList */; };
 		50AC842C2CB863EC002786BF /* PhotosServiceAllTargets in Frameworks */ = {isa = PBXBuildFile; productRef = 50AC842B2CB863EC002786BF /* PhotosServiceAllTargets */; };
@@ -46,6 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50AC84202CB84CF6002786BF /* FusionDI in Frameworks */,
+				5017A3DB2DA5AE800006788B /* NetworkingKit in Frameworks */,
 				50AC842C2CB863EC002786BF /* PhotosServiceAllTargets in Frameworks */,
 				50AC842A2CB85FCA002786BF /* GalleryList in Frameworks */,
 			);
@@ -110,6 +112,7 @@
 				50AC841F2CB84CF6002786BF /* FusionDI */,
 				50AC84292CB85FCA002786BF /* GalleryList */,
 				50AC842B2CB863EC002786BF /* PhotosServiceAllTargets */,
+				5017A3DA2DA5AE800006788B /* NetworkingKit */,
 			);
 			productName = FusionGallery;
 			productReference = 503B532E2CB84C35008BE430 /* FusionGallery.app */;
@@ -146,7 +149,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					503B532D2CB84C35008BE430 = {
 						CreatedOnToolsVersion = 16.0;
@@ -258,6 +261,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LS9HB285X6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -321,6 +325,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LS9HB285X6;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -354,7 +359,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FusionGallery/Preview Content\"";
-				DEVELOPMENT_TEAM = LS9HB285X6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -384,7 +388,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FusionGallery/Preview Content\"";
-				DEVELOPMENT_TEAM = LS9HB285X6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -412,7 +415,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LS9HB285X6;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
@@ -431,7 +433,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LS9HB285X6;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
@@ -484,6 +485,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5017A3DA2DA5AE800006788B /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkingKit;
+		};
 		50AC841F2CB84CF6002786BF /* FusionDI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FusionDI;

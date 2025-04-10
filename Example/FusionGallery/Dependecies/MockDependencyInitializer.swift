@@ -35,6 +35,13 @@ enum DebugSettings {
 import PhotosServiceProtocols
 import PhotosServiceMock
 import PhotosService
+import DependencyDefinitions
+
+public extension PhotosServiceDependency {
+    static var mock: PhotosServiceDependency {
+        PhotosServiceDependency(service: PhotosService.mockPhotosService)
+    }
+}
 
 enum DependenciesInitiator {
     static func initDependencies() {

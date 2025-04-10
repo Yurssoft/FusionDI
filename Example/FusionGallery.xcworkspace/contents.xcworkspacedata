@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:DependencyDefinitions">
+   </FileRef>
+   <FileRef
+      location = "group:NetworkingKit">
+   </FileRef>
+   <FileRef
       location = "group:GalleryList">
    </FileRef>
    <FileRef

@@ -46,8 +46,7 @@ public struct GalleryList: View {
 #if DEBUG
 
 import FusionDI
-import PhotosServiceMock
-import PhotosServiceProtocols
+import DependencyDefinitions
 
 extension GalleryList {
     static func setupPreview() {

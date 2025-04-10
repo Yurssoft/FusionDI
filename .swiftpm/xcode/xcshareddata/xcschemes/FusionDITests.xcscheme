@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1610"
+   LastUpgradeVersion = "1630"
    version = "2.2">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -8,13 +8,14 @@
       buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "YES">
-            <AutocreatedTestPlanReference>
-            </AutocreatedTestPlanReference>
+            <TestPlanReference
+               reference = "container:Tests/FusionDITests.xctestplan">
+            </TestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
