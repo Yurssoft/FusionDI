@@ -20,6 +20,9 @@ dependencies: [
 
 ## Usage
 
+### TL; DR;
+Video: https://youtu.be/wi0psDwk1Do
+
 ### Registering Dependencies
 
 You can register a service and its implementation using the following syntax:
